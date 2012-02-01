@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blacklistentries>
+    <blacklist>
+        <subnet>212.70.166.2</subnet>
+        <description>a single IP address</description>
+    </blacklist>
+    <blacklist>
+        <subnet>212.70.166.2/24</subnet>
+        <description>csdd</description>
+    </blacklist>
+    <blacklist>
+        <subnet>195.234.144.34/24</subnet>
+        <description>iem</description>
+    </blacklist>
+</blacklistentries>

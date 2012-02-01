@@ -1,0 +1,14 @@
+CSN Test FrontEnd
+-----------------------------------------------------
+Small program for serving CSN Test question and correct answers. 
+Programm deploys on google app engine (free hosting).
+
++---------------------------------------------------+
+|            USE AT YOUR OWN RISK !!!!              |
+| copyrights of exam materials can be violated      |
++---------------------------------------------------+
+
+Technical stack :
+   * App Engine 1.6.1
+   * GWT 2.4.0
+   * GAE remote service 

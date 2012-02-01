@@ -1,0 +1,109 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    font-size: small;
+    margin: 8px;
+}
+
+#menu {
+    position: absolute;
+    top: 50px;
+    left: 150px;
+}
+
+#pic {
+    position: absolute;
+    top: 150px;
+    left: 150px;
+}
+
+#text {
+    position: absolute;
+    top: 380px;
+    left: 150px;
+}
+
+#butt {
+    position: absolute;
+    top: 550px;
+    left: 150px;
+}
+
+#contact {
+    position: absolute;
+    top: 600px;
+    left: 150px;
+    color: #a9a9a9;
+    font-size: 10px
+}
+
+.gwt-RadioButton-Custom-Correct {
+    color: green;
+        border-color: red;
+}
+
+.gwt-RadioButton-Custom-InCorrect {
+    color: red;
+}
+
+.gwt-RadioButton-Custom-Border-Red {
+    border: 1px dotted red;
+        border-color: red;
+}
+
+.gwt-RadioButton-Custom-Border-Green {
+    border: 1px dotted green;
+}
+
+.gwt-Lable-ErrorMessage {
+    background-color: red;
+    border-color: red;
+}
+
+/* overriding defualt style */
+.gwt-RadioButton {
+    display: block;
+    float: left;
+    clear: left;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.gwt-VerticalPanel {
+    padding: 5px;
+    color: red;
+    border-color: red;
+}
+
+.gwt-HorizontalPanel {
+    padding: 5px;
+    color: blue;
+    border-color: red;
+}
+
+.gwt-LabelBlueUnderline{
+    text-decoration: underline;
+    color: blue;
+    margin-left: 10px;
+}
+
+.popupContent{
+    border: 1px solid #000000;
+    background: Window;
+}
+
+.gwt-HTML{
+    margin: 5px;
+}
+
+.gwt-Button{
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.gwt-ListBox {
+    margin-left: 5px;
+}
