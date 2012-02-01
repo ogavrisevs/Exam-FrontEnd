@@ -11,7 +11,6 @@
     <display-name>CSN Exams</display-name>
     <description>CSN Exams</description>
 
-
     <context-param>
         <description>The email address of the administrator</description>
         <param-name>webmaster</param-name>
@@ -21,11 +20,11 @@
     <!-- ########################################################################################################### -->
     <servlet>
         <servlet-name>MainServlet</servlet-name>
-        <servlet-class>server.MainServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.MainServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListServlet</servlet-name>
-        <servlet-class>server.ListServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.ListServlet</servlet-class>
     </servlet>
     <servlet>
         <display-name>Remote API Servlet</display-name>
@@ -35,27 +34,27 @@
     </servlet>
     <servlet>
         <servlet-name>DelAllServlet</servlet-name>
-        <servlet-class>server.DelAllServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.DelAllServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>server.ImageServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.ImageServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>TCaseTypesServlet</servlet-name>
-        <servlet-class>server.TCaseTypesServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.TCaseTypesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ParagraphsServlet</servlet-name>
-        <servlet-class>server.ParagraphServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.ParagraphServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddTCasesServlet</servlet-name>
-        <servlet-class>server.TCasesServlet</servlet-class>
+        <servlet-class>com.bla.laa.server.TCasesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Main RPC</servlet-name>
-        <servlet-class>server.RPCImpl</servlet-class>
+        <servlet-class>com.bla.laa.server.RPCImpl</servlet-class>
     </servlet>
 
     <servlet>
