@@ -1,6 +1,7 @@
 package com.bla.laa.client;
 
 import com.bla.laa.client.comp.AnswerRadioButton;
+import com.bla.laa.client.comp.ParagHtml;
 import com.bla.laa.client.comp.ParagLabel;
 import com.bla.laa.client.comp.ScrollPanelUpDown;
 import com.bla.laa.shared.Model.TCaseTypeModel;
@@ -64,6 +65,9 @@ public class Main implements EntryPoint {
 
     //data
     List<TCaseTypeModel> tCaseTypeModels = new ArrayList<TCaseTypeModel>();
+
+    // paragHtml bloc on top of scroll panel
+    ParagHtml paragHtml;
 
     Main main;
 
@@ -247,10 +251,18 @@ public class Main implements EntryPoint {
                     ScrollPanelUpDown scrollPanel =  (ScrollPanelUpDown) source;
 
                     logger.info(String.valueOf(scrollPanel.getVerticalScrollPosition()));
-                    logger.info(String.valueOf(scrollPanel.getScrollPosition()));
-
                     ScrollPanelUpDown.Direction direction = scrollPanel.getDirection();
-                    logger.info(String.valueOf(direction.name()));
+
+                    Integer paragId = 0;
+                    if (ScrollPanelUpDown.Direction.DOWN == direction){
+                        paragId = paragHtml.getLast();
+                        paragId--;
+                    }else if (ScrollPanelUpDown.Direction.UP == direction){
+                        paragId = paragHtml.getFirst();
+                        paragId++;
+                    }
+                    logger.info(String.valueOf(direction));
+                    RPC.App.getInstance().getParagraphMore(paragId, new ParagraphMoreAsyncCallback(main));
                 }
             }
         };

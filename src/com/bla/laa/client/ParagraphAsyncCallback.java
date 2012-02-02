@@ -1,16 +1,16 @@
 package com.bla.laa.client;
 
 
+import com.bla.laa.client.comp.ParagHtml;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.SortedMap;
 import java.util.logging.Logger;
 
-public class ParagraphAsyncCallback implements AsyncCallback<SafeHtml> {
+public class ParagraphAsyncCallback implements AsyncCallback<SortedMap<Integer, SafeHtml>> {
     private static final Logger logger = Logger.getLogger(ParagraphAsyncCallback.class.getName());
     Main main = null;
 
@@ -26,12 +26,13 @@ public class ParagraphAsyncCallback implements AsyncCallback<SafeHtml> {
         main.messageLabel.setVisible(true);
     }
 
-    public void onSuccess(Map<Integer, SafeHtml> htmlMap) {
-        logger.info("ParagraphAsyncCallback.onSuccess()");
-
+    public void onSuccess(SortedMap<Integer, SafeHtml> htmlMap) {
         Integer key = (Integer) htmlMap.keySet().toArray()[0];
-        // add html
-        HTML html = new HTML(htmlMap.get(key));
+        logger.info("ParagraphAsyncCallback.onSuccess("+ key +")");
+
+        ParagHtml html = new ParagHtml();
+        html.setHTML(htmlMap.get(key));
+        html.addMap(htmlMap);
         html.setAutoHorizontalAlignment(HTML.ALIGN_JUSTIFY);
         html.addClickHandler(main.paragPopUpClickHandler);
 
@@ -43,6 +44,8 @@ public class ParagraphAsyncCallback implements AsyncCallback<SafeHtml> {
             }
         }
 
+        //leave reference on main
+        this.main.paragHtml = html;
         this.main.paragScrollPane.add(html);
         this.main.paragPopup.show();
 

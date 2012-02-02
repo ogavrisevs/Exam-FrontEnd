@@ -74,7 +74,7 @@
 
     <servlet-mapping>
       <servlet-name>remoteLoggingServlet</servlet-name>
-      <url-pattern>/Main/remote_logging</url-pattern>
+      <url-pattern>/com.bla.laa.Main/remote_logging</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
