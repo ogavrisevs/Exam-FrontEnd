@@ -66,6 +66,10 @@
       <servlet-name>remoteLoggingServlet</servlet-name>
       <servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>com.bla.laa.Main RPC</servlet-name>
+        <servlet-class>com.bla.laa.server.RPCImpl</servlet-class>
+    </servlet>
     <!-- ########################################################################################################### -->
 
     <servlet-mapping>
@@ -115,6 +119,10 @@
     <servlet-mapping>
         <servlet-name>Main RPC</servlet-name>
         <url-pattern>/Main/RPC</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>com.bla.laa.Main RPC</servlet-name>
+        <url-pattern>/com.bla.laa.Main/RPC</url-pattern>
     </servlet-mapping>
     <!-- ########################################################################################################### -->
     <security-constraint>

@@ -6,6 +6,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HTML;
 
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class ParagraphAsyncCallback implements AsyncCallback<SafeHtml> {
@@ -24,11 +26,12 @@ public class ParagraphAsyncCallback implements AsyncCallback<SafeHtml> {
         main.messageLabel.setVisible(true);
     }
 
-    public void onSuccess(SafeHtml result) {
+    public void onSuccess(Map<Integer, SafeHtml> htmlMap) {
         logger.info("ParagraphAsyncCallback.onSuccess()");
 
+        Integer key = (Integer) htmlMap.keySet().toArray()[0];
         // add html
-        HTML html = new HTML(result);
+        HTML html = new HTML(htmlMap.get(key));
         html.setAutoHorizontalAlignment(HTML.ALIGN_JUSTIFY);
         html.addClickHandler(main.paragPopUpClickHandler);
 

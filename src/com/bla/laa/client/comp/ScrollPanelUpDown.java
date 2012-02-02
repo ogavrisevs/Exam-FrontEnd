@@ -12,7 +12,6 @@ public class ScrollPanelUpDown extends ScrollPanel{
         private int val;
         Direction(int val){
             this.val = val;
-
         }
     }
 

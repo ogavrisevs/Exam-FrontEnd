@@ -2,6 +2,7 @@ package com.bla.laa.server;
 
 import com.bla.laa.client.RPC;
 import com.bla.laa.client.RpcCustException;
+import com.bla.laa.client.comp.ScrollPanelUpDown;
 import com.bla.laa.shared.DAO.ParagraphDAO;
 import com.bla.laa.shared.DAO.TCaseDAO;
 import com.bla.laa.shared.Model.TCaseModel;
@@ -19,13 +20,23 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
+
+import static com.bla.laa.client.comp.ScrollPanelUpDown.*;
+import static com.bla.laa.client.comp.ScrollPanelUpDown.Direction.*;
 
 public class RPCImpl extends RemoteServiceServlet implements RPC {
     private static final Logger logger = Logger.getLogger(RPCImpl.class.getName());
     private static final PersistenceManager pm = PMF.get().getPersistenceManager();
     public static final Integer VALUE_NOT_SET = -1;
+    private static Map<Integer, SafeHtml> NO_HTML_DATA;
+    static {
+        NO_HTML_DATA = new HashMap<Integer, SafeHtml>(1);
+        NO_HTML_DATA.put(0, SafeHtmlUtils.fromTrustedString(""));
+    }
 
     ParagraphService paragraphService = null;
     TCaseWraper tCaseWraper = null;
@@ -35,7 +46,7 @@ public class RPCImpl extends RemoteServiceServlet implements RPC {
         tCaseWraper = new TCaseWraper();
     }
 
-    public SafeHtml getParagraph(Integer paragId) throws RpcCustException {
+    public Map<Integer, SafeHtml> getParagraph(Integer paragId) throws RpcCustException {
         logger.info("RPCImpl.getParagraph(" + paragId + ")");
 
         if ( (paragId == null) || (paragId < 0 ))
@@ -49,10 +60,34 @@ public class RPCImpl extends RemoteServiceServlet implements RPC {
         if ((html == null) || (html.isEmpty()))
             throw new RpcCustException("Par. text not found !");
 
-        SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(html);
-        return safeHtml;
+        Map<Integer, SafeHtml> map = new HashMap<Integer, SafeHtml>();
+        map.put(paragraphDAO.getNr(), SafeHtmlUtils.fromTrustedString(paragraphDAO.getParagName()));
+        return map;
     }
 
+    public Map<Integer, SafeHtml> getParagraphMore(Integer paragId, ScrollPanelUpDown.Direction direction) throws RpcCustException{
+        Integer fetchId = paragId;
+
+        if (DOWN == direction)
+            fetchId++;
+        else if (UP == direction)
+            fetchId--;
+
+        if (fetchId <= 0){
+            logger.warning("no data for paragr up");
+            return NO_HTML_DATA;
+        }
+        ParagraphDAO paragraphDAO = paragraphService.getParagById(fetchId);
+        if (paragraphDAO == null){
+            logger.warning("no data for paragr down");
+            return NO_HTML_DATA;
+        }
+
+        Map<Integer, SafeHtml> map = new HashMap<Integer, SafeHtml>();
+        map.put(paragraphDAO.getNr(), SafeHtmlUtils.fromTrustedString(paragraphDAO.getParagName()));
+
+        return map;
+    }
      /*
     public TCaseModel getTC() throws RpcCustException {
         return getTCMock();
