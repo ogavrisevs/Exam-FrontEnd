@@ -1,13 +1,12 @@
 package com.bla.laa.client;
 
 
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import java.util.SortedMap;
 import java.util.logging.Logger;
 
-public class ParagraphMoreAsyncCallback implements AsyncCallback<SortedMap<Integer, SafeHtml>> {
+public class ParagraphMoreAsyncCallback implements AsyncCallback<SortedMap<Integer, String /*SafeHtml*/>> {
     private static final Logger logger = Logger.getLogger(ParagraphMoreAsyncCallback.class.getName());
     Main main = null;
 
@@ -19,10 +18,10 @@ public class ParagraphMoreAsyncCallback implements AsyncCallback<SortedMap<Integ
         logger.severe("ParagraphMoreAsyncCallback.onFailure(" + caught.getMessage() + ");");
     }
 
-    public void onSuccess(SortedMap<Integer, SafeHtml> htmlMap) {
+    public void onSuccess(SortedMap<Integer, String /*SafeHtml*/> htmlMap) {
         logger.info(ParagraphMoreAsyncCallback.class.getName()+ ".onSuccess()");
         main.paragHtml.addMap(htmlMap);
-        main.paragHtml. republish();
+        main.paragHtml.republish();
 
     }
 }

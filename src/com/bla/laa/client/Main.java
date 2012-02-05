@@ -4,6 +4,7 @@ import com.bla.laa.client.comp.AnswerRadioButton;
 import com.bla.laa.client.comp.ParagHtml;
 import com.bla.laa.client.comp.ParagLabel;
 import com.bla.laa.client.comp.ScrollPanelUpDown;
+import com.bla.laa.client.handlers.VertScrollHandler;
 import com.bla.laa.shared.Model.TCaseTypeModel;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.*;
@@ -27,7 +28,6 @@ public class Main implements EntryPoint {
     private static final String QUESTION_TYPES = "Temati : ";
     private static final String CUSTOM_STYLE_NAME = "-Custom-";
     private static final String MAIL = "codon.dev@gmail.com";
-    private static final String NEXT_PARAG_BUT = "Parādīt nākamo punktu";
 
     final HorizontalPanel menuHorizontalPanel = new HorizontalPanel();
     final VerticalPanel textVerticalPanel = new VerticalPanel();
@@ -36,7 +36,6 @@ public class Main implements EntryPoint {
 
     final Label messageLabel = new Label("");
     final Label questionLabel = new Label("");
-    //final Label correctAnswer = new Label("");
     final Label questionTypeLable = new Label(QUESTION_TYPES);
 
     final Button answerButton = new Button(CHK_ANSW_BUT);
@@ -50,7 +49,7 @@ public class Main implements EntryPoint {
     final PopupPanel imagePopup = new PopupPanel(true);
     PopupPanel paragPopup = null;
 
-    ScrollPanelUpDown paragScrollPane = null;
+    public ScrollPanelUpDown paragScrollPane = null;
 
     //--- handlers
     ValueChangeHandler radioButtonHandler = null;
@@ -61,13 +60,12 @@ public class Main implements EntryPoint {
     ChangeHandler tCTListBoxChangeHandler = null;
     ClickHandler paragrLableClickHandler = null;
     ClickHandler paragPopUpClickHandler = null;
-    ScrollHandler scrollHandler = null;
 
     //data
     List<TCaseTypeModel> tCaseTypeModels = new ArrayList<TCaseTypeModel>();
 
     // paragHtml bloc on top of scroll panel
-    ParagHtml paragHtml;
+    public ParagHtml paragHtml;
 
     Main main;
 
@@ -118,13 +116,11 @@ public class Main implements EntryPoint {
             paragPopup.setWidth("700");
             paragPopup.setGlassEnabled(true);
             paragPopup.setHeight("400");
-            paragPopup.setTitle("Title");
+            //paragPopup.setTitle("Title");
 
             paragScrollPane = new ScrollPanelUpDown();
-            paragScrollPane.setAlwaysShowScrollBars(false);
-            paragScrollPane.getMinimumHorizontalScrollPosition();
+            paragScrollPane.setAlwaysShowScrollBars(true);
             paragScrollPane.setWidth("680");
-
             paragPopup.add(paragScrollPane);
         }
         paragPopup.hide();
@@ -152,7 +148,7 @@ public class Main implements EntryPoint {
         imageSmall.addDomHandler(imgSClickHandler, ClickEvent.getType());
 
         paragScrollPane.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
-        paragScrollPane.addScrollHandler(scrollHandler);
+        paragScrollPane.addScrollHandler(new VertScrollHandler(this));
         paragPopup.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
     }
 
@@ -240,30 +236,6 @@ public class Main implements EntryPoint {
             public void onClick(ClickEvent event) {
                 logger.info("paragPopUpClickHandler.ClickHandler()");
                 paragPopup.hide();
-            }
-        };
-
-        scrollHandler = new ScrollHandler() {
-            public void onScroll(ScrollEvent event) {
-                logger.info("ScrollHandler().onScroll();");
-                Widget source = (Widget) event.getSource();
-                if (source instanceof ScrollPanel){
-                    ScrollPanelUpDown scrollPanel =  (ScrollPanelUpDown) source;
-
-                    logger.info(String.valueOf(scrollPanel.getVerticalScrollPosition()));
-                    ScrollPanelUpDown.Direction direction = scrollPanel.getDirection();
-
-                    Integer paragId = 0;
-                    if (ScrollPanelUpDown.Direction.DOWN == direction){
-                        paragId = paragHtml.getLast();
-                        paragId--;
-                    }else if (ScrollPanelUpDown.Direction.UP == direction){
-                        paragId = paragHtml.getFirst();
-                        paragId++;
-                    }
-                    logger.info(String.valueOf(direction));
-                    RPC.App.getInstance().getParagraphMore(paragId, new ParagraphMoreAsyncCallback(main));
-                }
             }
         };
     }

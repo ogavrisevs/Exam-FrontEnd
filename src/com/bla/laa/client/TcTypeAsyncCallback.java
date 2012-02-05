@@ -13,6 +13,7 @@ public class TcTypeAsyncCallback implements AsyncCallback<List<TCaseTypeModel>> 
     Main main = null;
 
     public TcTypeAsyncCallback(Main main) {
+        logger.info(TcTypeAsyncCallback.class.getName() +" construct");
         this.main = main;
     }
 

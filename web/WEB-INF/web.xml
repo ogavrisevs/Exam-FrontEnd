@@ -74,7 +74,7 @@
 
     <servlet-mapping>
       <servlet-name>remoteLoggingServlet</servlet-name>
-      <url-pattern>/com.bla.laa.Main/remote_logging</url-pattern>
+      <url-pattern>/MainMod/remote_logging</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -122,7 +122,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>com.bla.laa.Main RPC</servlet-name>
-        <url-pattern>/com.bla.laa.Main/RPC</url-pattern>
+        <url-pattern>/MainMod/RPC</url-pattern>
     </servlet-mapping>
     <!-- ########################################################################################################### -->
     <security-constraint>

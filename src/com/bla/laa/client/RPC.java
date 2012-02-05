@@ -3,7 +3,6 @@ package com.bla.laa.client;
 import com.bla.laa.shared.Model.TCaseModel;
 import com.bla.laa.shared.Model.TCaseTypeModel;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -14,9 +13,9 @@ import java.util.SortedMap;
 @RemoteServiceRelativePath("RPC")
 public interface RPC extends RemoteService {
 
-    SortedMap<Integer, SafeHtml> getParagraph(Integer paragId) throws RpcCustException;
+    SortedMap<Integer, String /*SafeHtml*/ > getParagraph(Integer paragId) throws RpcCustException;
 
-    SortedMap<Integer, SafeHtml> getParagraphMore(Integer paragId) throws RpcCustException;
+    SortedMap<Integer, String /*SafeHtml*/ > getParagraphMore(Integer paragId) throws RpcCustException;
 
     TCaseModel getTC(Integer str) throws RpcCustException;
 

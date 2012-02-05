@@ -5,6 +5,7 @@
  */
 package com.bla.laa.client.comp;
 
+import com.bla.laa.client.Main;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.HTML;
@@ -15,26 +16,33 @@ import java.util.logging.Logger;
 
 public class ParagHtml extends HTML{
     private static final Logger logger = Logger.getLogger(ParagHtml.class.getName());
+    private SortedMap<Integer, String /*SafeHtml*/> htmlMap = new TreeMap<Integer, String /*SafeHtml*/>();
+    Main main;
 
-    private SortedMap<Integer, SafeHtml> htmlMap = new TreeMap<Integer, SafeHtml>();
-
-    public ParagHtml() {
+    public ParagHtml(Main main) {
         super();
+        this.main = main;
     }
 
-    public void addMap(SortedMap<Integer, SafeHtml> htmlMapL) {
-        for (Integer keyL : htmlMapL.keySet())
-            htmlMap.put(keyL, htmlMap.get(keyL));
+    public void addMap(SortedMap<Integer, String /*SafeHtml*/> htmlMapL) {
+        logger.info(ParagHtml.class.getName() + " addMap() ");
+        for (Integer keyL : htmlMapL.keySet()){
+            htmlMap.put(keyL, htmlMapL.get(keyL));
+        }
+        logger.info("htmlMap.size() " + htmlMap.size());
     }
 
     public void republish() {
         logger.info(ParagHtml.class.getName() + "republish()");
 
         String htmlAll = "";
-        for (Integer keyL : htmlMap.keySet())
-            htmlAll += ((SafeHtml)htmlMap.get(keyL)).asString();
-        SafeHtml safeHtml = SafeHtmlUtils.fromString(htmlAll) ;
+        for (Integer keyL : htmlMap.keySet()){
+            htmlAll += htmlMap.get(keyL);
+        }
+        SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(htmlAll) ;
         setHTML(safeHtml);
+
+        main.paragScrollPane.setScrollPosBack();
     }
 
     public Integer getFirst(){
@@ -49,20 +57,16 @@ public class ParagHtml extends HTML{
         }
 
         return key;
-
     }
 
     public Integer getLast(){
         logger.info("getLast()");
-        logger.info("htmlMap.size() " + htmlMap.size());
-
         Integer key = 0;
         try{
             key = htmlMap.lastKey();
         }catch (Exception e){
             logger.severe(e.getMessage());
         }
-
         return key;
     }
 }
