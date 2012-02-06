@@ -64,11 +64,9 @@ public class ScrollPanelUpDown extends ScrollPanel{
 
 
     public void printPoz(){
-        logger.info("VerticalScrollPosition() : " +String.valueOf(getVerticalScrollPosition()));
-        logger.info("getMinimumVerticalScrollPosition() " +String.valueOf(getMinimumVerticalScrollPosition() ));
-        logger.info("getMaximumVerticalScrollPosition() : " +String.valueOf(getMaximumVerticalScrollPosition() ));
-
-    }
-
-
+        Integer curPoz = getVerticalScrollPosition();
+        Integer minPoz = getMinimumVerticalScrollPosition();
+        Integer maxPoz = getMaximumVerticalScrollPosition();
+        logger.info("VerticalScrollPosition( cur [min-max]) : "+ curPoz + " [ "+ minPoz +" - "+maxPoz + " ] " );
+   }
 }

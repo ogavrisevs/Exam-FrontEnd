@@ -20,7 +20,7 @@ public class ParagraphAsyncCallback implements AsyncCallback<SortedMap<Integer, 
     public void onFailure(Throwable caught) {
         logger.severe("ParagraphAsyncCallback.onFailure("+ caught.getMessage() + ");");
         main.clearParagPopUp();
-        main.paragPopup.hide();
+        main.popupParags.hide();
         main.messageLabel.setText("Paragraph Not found !!!");
         main.messageLabel.setVisible(true);
     }
@@ -35,8 +35,8 @@ public class ParagraphAsyncCallback implements AsyncCallback<SortedMap<Integer, 
         html.setAutoHorizontalAlignment(HTML.ALIGN_JUSTIFY);
         html.addClickHandler(main.paragPopUpClickHandler);
 
-        if (this.main.paragScrollPane.getWidget() != null){
-            Iterator iterator = this.main.paragScrollPane.iterator();
+        if (this.main.scrollPaneParag.getWidget() != null){
+            Iterator iterator = this.main.scrollPaneParag.iterator();
             while (iterator.hasNext()){
                 iterator.next();
                 iterator.remove();
@@ -45,10 +45,11 @@ public class ParagraphAsyncCallback implements AsyncCallback<SortedMap<Integer, 
 
         //leave reference on main
         this.main.paragHtml = html;
-        this.main.paragScrollPane.add(html);
-        this.main.paragScrollPane.setVertScroll();
-        this.main.paragPopup.show();
-        main.paragScrollPane.printPoz();
+        this.main.scrollPaneParag.add(html);
+        this.main.paragHtml.republish();
+        this.main.scrollPaneParag.setVertScroll();
+        this.main.popupParags.show();
+        main.scrollPaneParag.printPoz();
 
     }
 }

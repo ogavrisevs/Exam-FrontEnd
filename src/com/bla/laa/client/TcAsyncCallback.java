@@ -38,7 +38,7 @@ public class TcAsyncCallback implements AsyncCallback<TCaseModel> {
         main.questionLabel.setText(model.getQuestionText());
 
         //rem old answers
-        Iterator<Widget> iterator = main.answersVerticalPanel.iterator();
+        Iterator<Widget> iterator = main.panelAnswersVertical.iterator();
         while (iterator.hasNext()) {
             Object obj =  iterator.next();
             iterator.remove();
@@ -72,7 +72,7 @@ public class TcAsyncCallback implements AsyncCallback<TCaseModel> {
                 }
                 horizontalPanel.add(horizontalPanelParag);
             }
-            main.answersVerticalPanel.add(horizontalPanel);
+            main.panelAnswersVertical.add(horizontalPanel);
         }
 
         main.imageSmall.setUrl("");

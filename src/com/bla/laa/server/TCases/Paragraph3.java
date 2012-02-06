@@ -1,8 +1,3 @@
-/*
- * @(#)Paragraph1.java
- *
- * Copyright Swiss Reinsurance Company, Mythenquai 50/60, CH 8022 Zurich. All rights reserved.
- */
 package com.bla.laa.server.TCases;
 
 import com.bla.laa.server.TCasesServlet;

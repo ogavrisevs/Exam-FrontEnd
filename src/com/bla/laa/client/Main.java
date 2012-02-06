@@ -4,6 +4,8 @@ import com.bla.laa.client.comp.AnswerRadioButton;
 import com.bla.laa.client.comp.ParagHtml;
 import com.bla.laa.client.comp.ParagLabel;
 import com.bla.laa.client.comp.ScrollPanelUpDown;
+import com.bla.laa.client.handlers.AnswerButtonClickHandler;
+import com.bla.laa.client.handlers.ImgSClickHandler;
 import com.bla.laa.client.handlers.VertScrollHandler;
 import com.bla.laa.shared.Model.TCaseTypeModel;
 import com.google.gwt.core.client.EntryPoint;
@@ -29,34 +31,33 @@ public class Main implements EntryPoint {
     private static final String CUSTOM_STYLE_NAME = "-Custom-";
     private static final String MAIL = "codon.dev@gmail.com";
 
-    final HorizontalPanel menuHorizontalPanel = new HorizontalPanel();
-    final VerticalPanel textVerticalPanel = new VerticalPanel();
-    final VerticalPanel answersVerticalPanel = new VerticalPanel();
-    final HorizontalPanel buttonHorizontalPanel = new HorizontalPanel();
+    final HorizontalPanel panelMenuHorizontal = new HorizontalPanel();
+    final VerticalPanel panelTextVertical = new VerticalPanel();
+    final VerticalPanel panelAnswersVertical = new VerticalPanel();
+    final HorizontalPanel panelButtonHorizontal = new HorizontalPanel();
 
     final Label messageLabel = new Label("");
     final Label questionLabel = new Label("");
     final Label questionTypeLable = new Label(QUESTION_TYPES);
 
-    final Button answerButton = new Button(CHK_ANSW_BUT);
+    public final Button answerButton = new Button(CHK_ANSW_BUT);
     final Button nextButton = new Button(NEXT_QUESTION_BUT);
 
-    final Image imageLarge = new Image();
+    public final Image imageLarge = new Image();
     final Image imageSmall = new Image();
 
     final ListBox tCaseTypeListBox = new ListBox(false);
 
-    final PopupPanel imagePopup = new PopupPanel(true);
-    PopupPanel paragPopup = null;
+    public PopupPanel popupImage = new PopupPanel(true);
+    public PopupPanel popupParags = null;
 
-    public ScrollPanelUpDown paragScrollPane = null;
+    public ScrollPanelUpDown scrollPaneParag = null;
 
     //--- handlers
     ValueChangeHandler radioButtonHandler = null;
-    ClickHandler answerButtonClickHandler = null;
     ClickHandler nextButtonClickHandler = null;
     ClickHandler imgLClickHandler = null;
-    ClickHandler imgSClickHandler = null;
+    //ClickHandler imgSClickHandler = null;
     ChangeHandler tCTListBoxChangeHandler = null;
     ClickHandler paragrLableClickHandler = null;
     ClickHandler paragPopUpClickHandler = null;
@@ -83,20 +84,20 @@ public class Main implements EntryPoint {
         // load first
         RPC.App.getInstance().getTC( -1 , new TcAsyncCallback(this.main));
 
-        menuHorizontalPanel.add(questionTypeLable);
-        menuHorizontalPanel.add(tCaseTypeListBox);
-        RootPanel.get("menu").add(menuHorizontalPanel);
+        panelMenuHorizontal.add(questionTypeLable);
+        panelMenuHorizontal.add(tCaseTypeListBox);
+        RootPanel.get("menu").add(panelMenuHorizontal);
 
-        textVerticalPanel.add(messageLabel);
-        textVerticalPanel.add(questionLabel);
-        textVerticalPanel.add(answersVerticalPanel);
-        RootPanel.get("text").add(textVerticalPanel);
+        panelTextVertical.add(messageLabel);
+        panelTextVertical.add(questionLabel);
+        panelTextVertical.add(panelAnswersVertical);
+        RootPanel.get("text").add(panelTextVertical);
 
         RootPanel.get("pic").add(imageSmall);
 
-        buttonHorizontalPanel.add(answerButton);
-        buttonHorizontalPanel.add(nextButton);
-        RootPanel.get("butt").add(buttonHorizontalPanel);
+        panelButtonHorizontal.add(answerButton);
+        panelButtonHorizontal.add(nextButton);
+        RootPanel.get("butt").add(panelButtonHorizontal);
     }
 
     public void initComponents() {
@@ -107,23 +108,23 @@ public class Main implements EntryPoint {
         messageLabel.setText("");
         questionLabel.setText("");
 
-        imagePopup.setAnimationEnabled(true);
-        imagePopup.setWidget(imageLarge);
+        popupImage.setAnimationEnabled(true);
+        popupImage.setWidget(imageLarge);
 
-        if (paragPopup == null){
-            paragPopup = new PopupPanel(false);
-            paragPopup.setAnimationEnabled(true);
-            paragPopup.setWidth("700");
-            paragPopup.setGlassEnabled(true);
-            paragPopup.setHeight("400");
-            //paragPopup.setTitle("Title");
+        if (popupParags == null){
+            popupParags = new PopupPanel(false);
+            popupParags.setAnimationEnabled(true);
+            popupParags.setWidth("700");
+            popupParags.setGlassEnabled(true);
+            popupParags.setHeight("400");
+            //popupParags.setTitle("Title");
 
-            paragScrollPane = new ScrollPanelUpDown();
-            paragScrollPane.setAlwaysShowScrollBars(true);
-            paragScrollPane.setWidth("680");
-            paragPopup.add(paragScrollPane);
+            scrollPaneParag = new ScrollPanelUpDown();
+            scrollPaneParag.setAlwaysShowScrollBars(true);
+            scrollPaneParag.setWidth("680");
+            popupParags.add(scrollPaneParag);
         }
-        paragPopup.hide();
+        popupParags.hide();
 
         messageLabel.setVisible(false);
         String style = messageLabel.getStyleName();
@@ -138,18 +139,18 @@ public class Main implements EntryPoint {
             RPC.App.getInstance().getTCaseTypes(new TcTypeAsyncCallback(this.main));
             tCaseTypeListBox.addChangeHandler(tCTListBoxChangeHandler);
         }
-        textVerticalPanel.setWidth("800");
+        panelTextVertical.setWidth("800");
     }
 
     public void setHandlers() {
-        answerButton.addClickHandler(answerButtonClickHandler);
+        answerButton.addClickHandler(new AnswerButtonClickHandler(this));
         nextButton.addClickHandler(nextButtonClickHandler);
         imageLarge.addClickHandler(imgLClickHandler);
-        imageSmall.addDomHandler(imgSClickHandler, ClickEvent.getType());
+        imageSmall.addDomHandler(new ImgSClickHandler(this), ClickEvent.getType());
 
-        paragScrollPane.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
-        paragScrollPane.addScrollHandler(new VertScrollHandler(this));
-        paragPopup.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
+        scrollPaneParag.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
+        scrollPaneParag.addScrollHandler(new VertScrollHandler(this));
+        popupParags.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
     }
 
     public void initHandlers() {
@@ -158,7 +159,7 @@ public class Main implements EntryPoint {
             public void onChange(ChangeEvent event) {
                 Integer itmeIndx = getTCaseTypeIdx();
                 logger.info("tCTListBoxChangeHandler.onChange("+ itmeIndx +")");
-                RPC.App.getInstance().getTC( itmeIndx , new TcAsyncCallback(main));
+                RPC.App.getInstance().getTC(itmeIndx, new TcAsyncCallback(main));
             }
         };
 
@@ -169,55 +170,18 @@ public class Main implements EntryPoint {
             }
         };
 
-        answerButtonClickHandler = new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                logger.info("answerButtonClickHandler.onClick()");
-                removeOldStyle();
-                if (isAnswerSelected()) {
-                    if (isSelectedCorrectAnswer()) {
-                        RadioButton selectedRB = getCorrectAnswerRadioButton();
-                        selectedRB.addStyleName("gwt-RadioButton-Custom-Correct");
-                    } else {
-                        RadioButton correctRB = getCorrectAnswerRadioButton();
-                        correctRB.addStyleName("gwt-RadioButton-Custom-Border-Green");
-
-                        RadioButton currentRB = getCurrentAnswerRadioButton();
-                        currentRB.addStyleName("gwt-RadioButton-Custom-InCorrect");
-                    }
-                    HorizontalPanel horizontalPanel = getParagrPanel();
-                    horizontalPanel.setVisible(true);
-
-                    disableAllRadioButtons();
-                    answerButton.setEnabled(false);
-                }
-            }
-        };
-
         imgLClickHandler = new ClickHandler() {
             public void onClick(ClickEvent event) {
                 logger.info("imgLClickHandler.onClick()");
                 if (!imageLarge.getUrl().isEmpty())
-                    imagePopup.hide();
-            }
-        };
-
-        imgSClickHandler = new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                logger.info("imgSClickHandler.onClick()");
-                if (!imageLarge.getUrl().isEmpty()) {
-                    Widget source = (Widget) event.getSource();
-                    int left = source.getAbsoluteLeft();
-                    int top = source.getAbsoluteTop();
-                    imagePopup.setPopupPosition(left - 100, top - 118);
-                    imagePopup.show();
-                }
+                    popupImage.hide();
             }
         };
 
         nextButtonClickHandler = new ClickHandler() {
             public void onClick(ClickEvent event) {
                 Integer itmeIdx = getTCaseTypeIdx();
-                logger.info("nextButtonClickHandler.onClick("+ itmeIdx +")");
+                logger.info("nextButtonClickHandler.onClick(" + itmeIdx + ")");
                 RPC.App.getInstance().getTC(itmeIdx, new TcAsyncCallback(main));
             }
         };
@@ -227,22 +191,22 @@ public class Main implements EntryPoint {
                 logger.info("paragrLableClickHandler.ClickHandler()");
                 ParagLabel paragLabel = (ParagLabel) event.getSource();
                 Widget source = (Widget) event.getSource();
-                paragPopup.setPopupPosition( 100, 20);
-                RPC.App.getInstance().getParagraph( paragLabel.getParagraphId(), new ParagraphAsyncCallback(main));
+                popupParags.setPopupPosition(100, 20);
+                RPC.App.getInstance().getParagraph(paragLabel.getParagraphId(), new ParagraphAsyncCallback(main));
             }
         };
 
         paragPopUpClickHandler = new ClickHandler() {
             public void onClick(ClickEvent event) {
                 logger.info("paragPopUpClickHandler.ClickHandler()");
-                paragPopup.hide();
+                popupParags.hide();
             }
         };
     }
 
-    private HorizontalPanel getParagrPanel(){
+    public HorizontalPanel getParagrPanel(){
         logger.info("getParagrPanel()");
-        Iterator<Widget> iterator = answersVerticalPanel.iterator();
+        Iterator<Widget> iterator = panelAnswersVertical.iterator();
         while (iterator.hasNext()) {
             Object obj = iterator.next();
             if (obj instanceof  HorizontalPanel){
@@ -261,7 +225,7 @@ public class Main implements EntryPoint {
     private List<AnswerRadioButton> getAnswerRadioButtons(){
         List<AnswerRadioButton> radioButtons = new ArrayList<AnswerRadioButton>();
 
-        Iterator<Widget> iterator = answersVerticalPanel.iterator();
+        Iterator<Widget> iterator = panelAnswersVertical.iterator();
         while (iterator.hasNext()) {
             Object obj = iterator.next();
             if (obj instanceof  HorizontalPanel){
@@ -340,7 +304,7 @@ public class Main implements EntryPoint {
     }
 
     public void clearParagPopUp(){
-        Iterator iterator = main.paragPopup.iterator();
+        Iterator iterator = main.popupParags.iterator();
         while (iterator.hasNext()){
             Object obj =  iterator.next();
             if ((obj instanceof HTML) || (obj instanceof Label) || (obj instanceof ScrollPanel))

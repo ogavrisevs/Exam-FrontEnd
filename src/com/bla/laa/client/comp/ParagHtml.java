@@ -1,11 +1,8 @@
-/*
- * @(#)ParagHtml.java
- *
- * Copyright Swiss Reinsurance Company, Mythenquai 50/60, CH 8022 Zurich. All rights reserved.
- */
 package com.bla.laa.client.comp;
 
 import com.bla.laa.client.Main;
+import com.bla.laa.client.ParagraphMoreAsyncCallback;
+import com.bla.laa.client.RPC;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 import com.google.gwt.user.client.ui.HTML;
@@ -42,7 +39,18 @@ public class ParagHtml extends HTML{
         SafeHtml safeHtml = SafeHtmlUtils.fromTrustedString(htmlAll) ;
         setHTML(safeHtml);
 
-        main.paragScrollPane.setScrollPosBack();
+        //getOffsetHeight()
+
+        logger.info(" paragHtml.getOffsetHeight() : "+ getOffsetHeight());
+        logger.info(" popupParags.getOffsetHeight() : "+ main.popupParags.getOffsetHeight());
+
+        // if not all space in windows ocupaid by html ask for more
+        if  (getOffsetHeight() < main.popupParags.getOffsetHeight()){
+            int paragId =  main.paragHtml.getLast();
+            RPC.App.getInstance().getParagraphMore(paragId, new ParagraphMoreAsyncCallback(main));
+        }
+
+        main.scrollPaneParag.setScrollPosBack();
     }
 
     public Integer getFirst(){
