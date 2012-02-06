@@ -21,7 +21,7 @@ public class VertScrollHandler implements ScrollHandler {
     }
 
     public void onScroll(ScrollEvent event) {
-        logger.info("ScrollHandler().onScroll();");
+        logger.info(VertScrollHandler.class.getName() +"().onScroll();");
         Widget source = (Widget) event.getSource();
         if (source instanceof ScrollPanel){
             ScrollPanelUpDown scrollPanel =  (ScrollPanelUpDown) source;
@@ -30,18 +30,19 @@ public class VertScrollHandler implements ScrollHandler {
             Integer minPoz = scrollPanel.getMinimumVerticalScrollPosition();
             Integer maxPoz = scrollPanel.getMaximumVerticalScrollPosition();
 
-            scrollPanel.printPoz();
             ScrollPanelUpDown.Direction direction = scrollPanel.getDirection();
+            logger.info("Direction  : "+ direction.name());
+            scrollPanel.printPoz();
 
-            if ((curPoz == minPoz) || (curPoz == maxPoz)){
+            if ((curPoz.equals( minPoz)) || (curPoz.equals( maxPoz))){
                 Integer paragId = 0;
-                if ((ScrollPanelUpDown.Direction.DOWN == direction) || (curPoz == maxPoz)){
+                if ((ScrollPanelUpDown.Direction.DOWN == direction) || (curPoz.equals(maxPoz))){
                     paragId = main.paragHtml.getLast();
                     paragId++;
-                } else if ((ScrollPanelUpDown.Direction.UP == direction) || (curPoz == minPoz)) {
+                } else if ((ScrollPanelUpDown.Direction.UP == direction) || (curPoz.equals(minPoz))) {
                     paragId = main.paragHtml.getFirst();
                     paragId--;
-                }else if (ScrollPanelUpDown.Direction.NO_CHANGE == direction){
+                } else if (ScrollPanelUpDown.Direction.NO_CHANGE == direction){
                     logger.severe( direction.name());
                 }
 

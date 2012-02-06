@@ -34,4 +34,14 @@ public class ParagraphService {
             return paragraphDAOs.get(0);
     }
 
+    public Boolean isParagExists(Integer paragId){
+        Query query = pm.newQuery(ParagraphDAO.class);
+        query.setFilter("id == param");
+        query.declareParameters("String param");
+        List<ParagraphDAO> paragraphDAOs = (List<ParagraphDAO>) query.execute(paragId);
+        if (paragraphDAOs.isEmpty())
+            return Boolean.FALSE;
+        else
+            return Boolean.TRUE;
+    }
 }

@@ -30,7 +30,7 @@ public class ParagraphDAO implements IsSerializable  {
     public ParagraphDAO(String paragName, String paragText) {
         this.paragName = paragName;
         this.paragText = new Text(paragText);
-        id = counter++;
+        this.id = ++counter;
     }
 
     public Key getKey() {
@@ -89,9 +89,9 @@ public class ParagraphDAO implements IsSerializable  {
     public String toString() {
         return "ParagraphDTO{" +
                 "key=" + key +
+                ", nr=" + id +
                 ", paragName='" + paragName + '\'' +
                 ", paragText=" + paragText +
-                ", nr=" + id +
                 '}';
     }
 }

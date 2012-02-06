@@ -1,5 +1,6 @@
 package com.bla.laa.client.comp;
 
+import com.bla.laa.client.Main;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
 import java.util.logging.Logger;
@@ -7,6 +8,12 @@ import java.util.logging.Logger;
 public class ScrollPanelUpDown extends ScrollPanel{
     private static final Logger logger = Logger.getLogger(ScrollPanelUpDown.class.getName());
     private final static Integer SCROLL_STEP = 10;
+    Main main;
+
+    public ScrollPanelUpDown(Main main ) {
+        super();
+        this.main = main;
+    }
 
     public enum Direction {
         UP (1),
@@ -49,15 +56,17 @@ public class ScrollPanelUpDown extends ScrollPanel{
     }
 
     public void setScrollPosBack(){
+        logger.info(ScrollPanelUpDown.class.getName() + ".setScrollPosBack()");
+
         Integer curPoz = getVerticalScrollPosition();
         Integer minPoz = getMinimumVerticalScrollPosition();
         Integer maxPoz = getMaximumVerticalScrollPosition();
+        printPoz();
 
-        if ((curPoz == minPoz) || (curPoz == maxPoz)){
-            logger.info("((curPoz == minPoz) || (curPoz == maxPoz))");
-            if (curPoz == minPoz)
+        if ((curPoz.equals(minPoz)) || (curPoz.equals(maxPoz))){
+            if (curPoz.equals(minPoz))
                 setVerticalScrollPosition(minPoz + SCROLL_STEP);
-            else if (curPoz == maxPoz)
+            else if (curPoz.equals(maxPoz))
                 setVerticalScrollPosition(maxPoz - SCROLL_STEP);
         }
     }

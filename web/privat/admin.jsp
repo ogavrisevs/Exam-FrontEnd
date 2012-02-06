@@ -10,6 +10,7 @@
 <a href="/public/root.html">Main</a><br>
 <br> Paragraphs <br>
 <a href="/admin/paragraph?print">Print All Paragraphs </a><br>
+<a href="/admin/paragraph?printid">Print All Id Paragraphs </a><br>
 <a href="/admin/paragraph?add">Add All Paragraph Servlet</a><br>
 <a href="/admin/paragraph?del">Del All Paragraph Servlet</a><br>
 <br>
@@ -19,7 +20,7 @@
 <a href="/admin/tctype?del" >Del All  TCaseTypes </a><br>
 <br>
 <br>TCases<br>
-<a href="/admin/addTc?add" >Add All TCasesServlet</a><br>
 <a href="/admin/addTc?print" >Print All TCasesServlet</a><br>
+<a href="/admin/addTc?add" >Add All TCasesServlet</a><br>
 <a href="/admin/addTc?del" >Del All TCasesServlet</a><br>
 </html>

@@ -47,9 +47,7 @@ public class ParagraphAsyncCallback implements AsyncCallback<SortedMap<Integer, 
         this.main.paragHtml = html;
         this.main.scrollPaneParag.add(html);
         this.main.paragHtml.republish();
-        this.main.scrollPaneParag.setVertScroll();
         this.main.popupParags.show();
-        main.scrollPaneParag.printPoz();
-
+        main.scrollPaneParag.setScrollPosBack();
     }
 }

@@ -13,9 +13,9 @@ import java.util.SortedMap;
 @RemoteServiceRelativePath("RPC")
 public interface RPC extends RemoteService {
 
-    SortedMap<Integer, String /*SafeHtml*/ > getParagraph(Integer paragId) throws RpcCustException;
+    SortedMap<Integer, String > getParagraph(Integer paragId) throws RpcCustException;
 
-    SortedMap<Integer, String /*SafeHtml*/ > getParagraphMore(Integer paragId) throws RpcCustException;
+    SortedMap<Integer, String > getParagraphMore(Integer paragId) throws RpcCustException;
 
     TCaseModel getTC(Integer str) throws RpcCustException;
 

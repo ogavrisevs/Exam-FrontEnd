@@ -119,7 +119,7 @@ public class Main implements EntryPoint {
             popupParags.setHeight("400");
             //popupParags.setTitle("Title");
 
-            scrollPaneParag = new ScrollPanelUpDown();
+            scrollPaneParag = new ScrollPanelUpDown(this);
             scrollPaneParag.setAlwaysShowScrollBars(true);
             scrollPaneParag.setWidth("680");
             popupParags.add(scrollPaneParag);

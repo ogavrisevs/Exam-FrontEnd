@@ -22,7 +22,9 @@ public class RPCImpl extends RemoteServiceServlet implements RPC {
     private static final Logger logger = Logger.getLogger(RPCImpl.class.getName());
     private static final PersistenceManager pm = PMF.get().getPersistenceManager();
     public static final Integer VALUE_NOT_SET = -1;
-    private static SortedMap<Integer, String /*SafeHtml*/> NO_HTML_DATA = new TreeMap<Integer, String /*SafeHtml*/>();
+    public static final Integer HTML_LENGHT = 1300;
+
+    private static SortedMap<Integer, String > NO_HTML_DATA = new TreeMap<Integer, String /*SafeHtml*/>();
 
     ParagraphService paragraphService = null;
     TCaseWraper tCaseWraper = null;
@@ -32,35 +34,40 @@ public class RPCImpl extends RemoteServiceServlet implements RPC {
         tCaseWraper = new TCaseWraper();
     }
 
-    public SortedMap<Integer, String /*SafeHtml*/> getParagraph(Integer paragId) throws RpcCustException {
+    public SortedMap<Integer, String> getParagraph(Integer paragId) throws RpcCustException {
         logger.info("RPCImpl.getParagraph(" + paragId + ")");
 
         if ( (paragId == null) || (paragId < 0 ))
             throw new RpcCustException(" Par. number not corect !");
 
-        ParagraphDAO paragraphDAO = paragraphService.getParagById(paragId);
-        if (paragraphDAO == null)
-            throw new RpcCustException("Par. not found !");
+        SortedMap<Integer, String > sortedMap = new TreeMap<Integer, String >();
+        int textLenght = 0;
+        while (textLenght < HTML_LENGHT){
+            ParagraphDAO paragraphDAO = paragraphService.getParagById(paragId);
+            if (paragraphDAO == null) {
+                throw new RpcCustException("Par. not found !");
+            }
 
-        String html = paragraphDAO.getParagText();
-        if ((html == null) || (html.isEmpty()))
-            throw new RpcCustException("Par. text not found !");
+            String html = paragraphDAO.getParagText();
+            if ((html == null) || (html.isEmpty())) {
+                throw new RpcCustException("Par. text not found !");
+            }
+            sortedMap.put(paragraphDAO.getNr(), paragraphDAO.getParagText() );
+            textLenght += paragraphDAO.getParagText().length();
 
-        SortedMap<Integer, String /*SafeHtml*/> sortedMap = new TreeMap<Integer, String /*SafeHtml*/ >();
-        sortedMap.put(paragraphDAO.getNr(), paragraphDAO.getParagText() /*SafeHtmlUtils.fromTrustedString(paragraphDAO.getParagText())*/);
+            paragId++;
+            if (!paragraphService.isParagExists(paragId))
+                break;
+
+        }
+
+
         return sortedMap;
     }
 
     public SortedMap<Integer, String /*SafeHtml*/> getParagraphMore(Integer paragId ) throws RpcCustException{
         logger.info("RPCImpl.getParagraphMore(" + paragId +")");
         Integer fetchId = paragId;
-
-        /*
-        if (DOWN == direction)
-            fetchId++;
-        else if (UP == direction)
-            fetchId--;
-        */
 
         if (fetchId <= 0){
             logger.warning("no data for paragr up");
@@ -72,8 +79,8 @@ public class RPCImpl extends RemoteServiceServlet implements RPC {
             return NO_HTML_DATA;
         }
 
-        SortedMap<Integer, String /*SafeHtml*/ > sortedMap = new TreeMap<Integer, String /*SafeHtml*/>();
-        sortedMap.put(paragraphDAO.getNr(), paragraphDAO.getParagText() /*SafeHtmlUtils.fromTrustedString(paragraphDAO.getParagText())*/);
+        SortedMap<Integer, String> sortedMap = new TreeMap<Integer, String>();
+        sortedMap.put(paragraphDAO.getNr(), paragraphDAO.getParagText() );
 
         return sortedMap;
     }

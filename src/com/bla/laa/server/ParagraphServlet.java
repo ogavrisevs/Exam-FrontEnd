@@ -26,7 +26,7 @@ public class ParagraphServlet extends HttpServlet {
 
     }
 
-    enum urlParams {print, del, add};
+    enum urlParams {print, printid, del, add};
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.request = request;
@@ -44,9 +44,25 @@ public class ParagraphServlet extends HttpServlet {
                     addAllParagraph();
                 if (paramName.contentEquals(urlParams.del.name()))
                     delAllParagraph();
+                if (paramName.contentEquals(urlParams.printid.name()))
+                    printAllid();
             }
-
         }
+    }
+
+    private void printAllid() throws IOException {
+        Query query = pm.newQuery(ParagraphDAO.class);
+        query.setOrdering("id asc");
+        List<ParagraphDAO> paragraphDAOs = (List<ParagraphDAO>) query.execute();
+
+        StringBuffer sb = new StringBuffer("Start printing .... \n");
+        for (ParagraphDAO paragraphDAO : paragraphDAOs) {
+            sb.append(paragraphDAO.toString());
+            sb.append("\n");
+        }
+
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().print(sb);
     }
 
     private void delAllParagraph() throws IOException {
