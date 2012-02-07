@@ -1,5 +1,6 @@
 package com.bla.laa.client;
 
+import com.bla.laa.client.comp.AboutDialogBox;
 import com.bla.laa.client.comp.AnswerRadioButton;
 import com.bla.laa.client.comp.ParagHtml;
 import com.bla.laa.client.comp.ParagLabel;
@@ -42,6 +43,7 @@ public class Main implements EntryPoint {
 
     public final Button answerButton = new Button(CHK_ANSW_BUT);
     final Button nextButton = new Button(NEXT_QUESTION_BUT);
+    public PushButton aboutPushButton = new PushButton(new Image("/public/imgW/about.png"));
 
     public final Image imageLarge = new Image();
     final Image imageSmall = new Image();
@@ -61,6 +63,7 @@ public class Main implements EntryPoint {
     ChangeHandler tCTListBoxChangeHandler = null;
     ClickHandler paragrLableClickHandler = null;
     ClickHandler paragPopUpClickHandler = null;
+    ClickHandler aboutPushButtonClickHandler = null;
 
     //data
     List<TCaseTypeModel> tCaseTypeModels = new ArrayList<TCaseTypeModel>();
@@ -74,7 +77,7 @@ public class Main implements EntryPoint {
     }
 
     public void onModuleLoad() {
-        logger.info("Main.onModuleLoad()");
+        logger.info( Main.class.getName()+ ".onModuleLoad()");
         this.main = this;
 
         initHandlers();
@@ -86,6 +89,7 @@ public class Main implements EntryPoint {
 
         panelMenuHorizontal.add(questionTypeLable);
         panelMenuHorizontal.add(tCaseTypeListBox);
+        panelMenuHorizontal.add(aboutPushButton);
         RootPanel.get("menu").add(panelMenuHorizontal);
 
         panelTextVertical.add(messageLabel);
@@ -151,6 +155,7 @@ public class Main implements EntryPoint {
         scrollPaneParag.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
         scrollPaneParag.addScrollHandler(new VertScrollHandler(this));
         popupParags.addHandler(main.paragPopUpClickHandler, ClickEvent.getType());
+        aboutPushButton.addClickHandler(aboutPushButtonClickHandler);
     }
 
     public void initHandlers() {
@@ -200,6 +205,18 @@ public class Main implements EntryPoint {
             public void onClick(ClickEvent event) {
                 logger.info("paragPopUpClickHandler.ClickHandler()");
                 popupParags.hide();
+            }
+        };
+
+        aboutPushButtonClickHandler = new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                logger.info("aboutPushButtonClickHandler.ClickHandler()");
+                AboutDialogBox dialogBox = new AboutDialogBox();
+                Widget source = (Widget) event.getSource();
+                //int left = source.getAbsoluteLeft();
+                //int top = source.getAbsoluteTop();
+                dialogBox.setPopupPosition(100, 150);
+                dialogBox.show();
             }
         };
     }
