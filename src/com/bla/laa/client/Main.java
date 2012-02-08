@@ -32,19 +32,23 @@ public class Main implements EntryPoint {
     private static final String CUSTOM_STYLE_NAME = "-Custom-";
     private static final String MAIL = "codon.dev@gmail.com";
 
+    //--- Panels
     final HorizontalPanel panelMenuHorizontal = new HorizontalPanel();
     final VerticalPanel panelTextVertical = new VerticalPanel();
     final VerticalPanel panelAnswersVertical = new VerticalPanel();
     final HorizontalPanel panelButtonHorizontal = new HorizontalPanel();
 
+    //-- Labels
     final Label messageLabel = new Label("");
     final Label questionLabel = new Label("");
     final Label questionTypeLable = new Label(QUESTION_TYPES);
 
+    //-- Buttons
     public final Button answerButton = new Button(CHK_ANSW_BUT);
     final Button nextButton = new Button(NEXT_QUESTION_BUT);
     public PushButton aboutPushButton = new PushButton(new Image("/public/imgW/about.png"));
 
+    //--- Images
     public final Image imageLarge = new Image();
     final Image imageSmall = new Image();
 
@@ -59,7 +63,6 @@ public class Main implements EntryPoint {
     ValueChangeHandler radioButtonHandler = null;
     ClickHandler nextButtonClickHandler = null;
     ClickHandler imgLClickHandler = null;
-    //ClickHandler imgSClickHandler = null;
     ChangeHandler tCTListBoxChangeHandler = null;
     ClickHandler paragrLableClickHandler = null;
     ClickHandler paragPopUpClickHandler = null;
@@ -72,9 +75,6 @@ public class Main implements EntryPoint {
     public ParagHtml paragHtml;
 
     Main main;
-
-    public Main() {
-    }
 
     public void onModuleLoad() {
         logger.info( Main.class.getName()+ ".onModuleLoad()");
@@ -327,7 +327,6 @@ public class Main implements EntryPoint {
             if ((obj instanceof HTML) || (obj instanceof Label) || (obj instanceof ScrollPanel))
                iterator.remove();
         }
-
     }
 
         public Integer getTCaseTypeIdx(){
@@ -340,7 +339,4 @@ public class Main implements EntryPoint {
             }
             return itmeIdx;
         }
-
-
-
 }

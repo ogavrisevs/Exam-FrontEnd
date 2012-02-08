@@ -72,13 +72,12 @@ body {
 
 .gwt-VerticalPanel {
     padding: 5px;
-    color: red;
+    /*color: red;*/
     border-color: red;
 }
 
 .gwt-HorizontalPanel {
     padding: 5px;
-    color: blue;
     border-color: red;
 }
 
@@ -107,3 +106,15 @@ body {
 .gwt-ListBox {
     margin-left: 5px;
 }
+
+.gwt-DialogBox {
+  border: 1px solid #000000;
+  padding: 5px;
+  background-color: white;
+  color: red;
+}
+
+.gwt-PushButton{
+    margin-left: 10px;
+}
+
