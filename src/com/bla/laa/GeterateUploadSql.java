@@ -23,7 +23,7 @@ public class GeterateUploadSql {
     public static StorageFactory sf = null;
     private static final Logger logger = Logger.getLogger(GeterateUploadSql.class.getName());
     private static final PersistenceManager pm = PMF.get().getPersistenceManager();
-    private static final String rootDirInFileSys = "web/imgC";
+    private static final String rootDirInFileSys = "web/public/imgC";
     private static final String rootDirWeb = "imgC";
     private static final String imgExt = "jpg";
 
@@ -65,9 +65,9 @@ public class GeterateUploadSql {
             }
             TCase tc = tCases.get(0);
 
-            sb.add("questionDTO = "+ new QuestionDAO(tc.getQuestion()).asObjStat());
+            sb.add("questionDAO = "+ new QuestionDAO(tc.getQuestion()).asObjStat());
 
-            sb.add("answerDTOs = new ArrayList<AnswerDAO>();");
+            sb.add("answerDAOs = new ArrayList<AnswerDAO>();");
             for (Answer answer : tc.getAnswers()) {
                 sb.add(new AnswerDAO(answer).asObjStat());
             }

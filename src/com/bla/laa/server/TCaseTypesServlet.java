@@ -93,9 +93,9 @@ public class TCaseTypesServlet extends HttpServlet {
         caseTypeModelList.add(new TCaseTypeModel(10,  "Visi "));
         caseTypeModelList.add(new TCaseTypeModel(11,  "Termini"));
         caseTypeModelList.add(new TCaseTypeModel(12,  "Transportlīdzekļu vadītāju vispārīgie pienākumi"));
-        caseTypeModelList.add(new TCaseTypeModel(13,  "Transportlīdzekļa vadītāja pienākumi īpašos gadījumos"));
 
         /*
+        caseTypeModelList.add(new TCaseTypeModel(13,  "Transportlīdzekļa vadītāja pienākumi īpašos gadījumos"));
         caseTypeModelList.add(new TCaseTypeModel(14,  "Braukšanas sākšana, braukšanas virziena maiņa"));
         caseTypeModelList.add(new TCaseTypeModel(16,  "Transportlīdzekļu izkārtojums uz brauktuves"));
         caseTypeModelList.add(new TCaseTypeModel(17,  "Braukšanas ātrums, distance un intervāls"));

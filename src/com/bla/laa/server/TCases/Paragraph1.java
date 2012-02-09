@@ -275,10 +275,62 @@ public class Paragraph1 extends Paragraphs{
         tCaseDAO.settCaseTypeIdx(caseTypeIdx);
         pm.makePersistent(tCaseDAO);
 
+        sb.append("//------------------------------------  1547" );
+        questionDAO = new QuestionDAO(" Uz kuru no minētajiem gadījumiem attiecināms termins \"Apstāšanās\"?", " fe06616408dc84faf286208da592d733", 81547392 );
+        answerDAOs = new ArrayList<AnswerDAO>();
+        answerDAOs.add(new AnswerDAO(" Transportlīdzekļa apturēšana uz laiku līdz 5 minūtēm, ja tā saistīta ar kravas iekraušanu transportlīdzeklī." , 57738 , " 110415adc95638bc2753f396914ac8cd",  true ));
+        answerDAOs.add(new AnswerDAO(" Jebkura transportlīdzekļa apturēšana uz laiku līdz 5 minūtēm." , 57777 , " 494579f40a7f137a65f997ea3b3d07ca",  false ));
+        answerDAOs.add(new AnswerDAO(" Transportlīdzekļa apturēšana uz laiku līdz 5 minūtēm vai ilgāk, ja tas nepieciešams kravas iekraušanai transportlīdzeklī." , 57813 , " 3c572b58885b35d39089bdd744c4509e",  false ));
+        answersDAO = new AnswersDAO(answerDAOs);
+        pm.makePersistent(questionDAO);
+        pm.makePersistent(answersDAO );
+        tCaseDAO = new TCaseDAO(questionDAO.getKey(), answersDAO.getKey());
+        tCaseDAO.setParagraphs(new ArrayList<String>(Arrays.asList("1.4.")));
+        tCaseDAO.settCaseTypeIdx( caseTypeIdx);
+        pm.makePersistent(tCaseDAO);
 
+        sb.append("//------------------------------------  775" );
+        questionDAO = new QuestionDAO(" Braukšanas josla ir jebkura brauktuves garenvirziena josla, kura ir pietiekami plata, lai pa to varētu braukt vienā rindā:", " 61b7301ae7633e28f2398d836d61089f", 67955590 );
+        answerDAOs = new ArrayList<AnswerDAO>();
+        answerDAOs.add(new AnswerDAO(" Automobiļi." , 57741 , " 76a1203345b8cb0a4e3ef644b9f818cb",  true ));
+        answerDAOs.add(new AnswerDAO(" Automobiļi un traktortehnika." , 57780 , " e9a9bda89f82a5ad4ca26ee35af55b55",  false ));
+        answerDAOs.add(new AnswerDAO(" Mehāniskie transportlīdzekļi." , 57816 , " c2a8f40811c9d24a8518b8653e8a7747",  false ));
+        answersDAO = new AnswersDAO(answerDAOs);
+        pm.makePersistent(questionDAO);
+        pm.makePersistent(answersDAO );
+        tCaseDAO = new TCaseDAO(questionDAO.getKey(), answersDAO.getKey());
+        tCaseDAO.setParagraphs(new ArrayList<String>(Arrays.asList("")));
+        tCaseDAO.settCaseTypeIdx( caseTypeIdx );
+        pm.makePersistent(tCaseDAO);
 
+        sb.append("//------------------------------------  1073" );
+        questionDAO = new QuestionDAO(" Uz kuru no minētajiem ceļiem attiecināms termins \"Galvenais ceļš\"?", " 49824b8f0a2ab9bc9da592132281c24d", 68471940 );
+        answerDAOs = new ArrayList<AnswerDAO>();
+        answerDAOs.add(new AnswerDAO(" Ceļš ar asfalta vai bruģa segumu attiecībā pret ceļu ar grants vai šķembu segumu." , 57748 , " 8a1b9229524f9500633a81751811e1ef",  false ));
+        answerDAOs.add(new AnswerDAO(" Ceļš ar asfalta segumu attiecībā pret ceļu bez seguma." , 57787 , " f8091edceb3d365cc2b2b078f18c2d71",  false ));
+        answerDAOs.add(new AnswerDAO(" Jebkurš ceļš attiecībā pret vietu, kur uz ceļa izbrauc no blakusteritorijas." , 57822 , " abd2420ebc8293cb85785fb00b77d4c5",  false ));
+        answerDAOs.add(new AnswerDAO(" Uz visiem iepriekšminētajiem ceļiem." , 57841 , " 774af59720eb28195d4168dd5e7e27cb",  true ));
+        answersDAO = new AnswersDAO(answerDAOs);
+        pm.makePersistent(questionDAO);
+        pm.makePersistent(answersDAO );
+        tCaseDAO = new TCaseDAO(questionDAO.getKey(), answersDAO.getKey());
+        tCaseDAO.setParagraphs(new ArrayList<String>(Arrays.asList("1.18.")));
+        tCaseDAO.settCaseTypeIdx( caseTypeIdx );
+        pm.makePersistent(tCaseDAO);
 
-
+        sb.append("//------------------------------------  15" );
+        questionDAO = new QuestionDAO(" Vai vadītājam, iebraucot būvmateriālu lielveikala slēgtajā teritorijā, ir jāievēro ceļu satiksmes noteikumu prasības?", " 3d585bbddbb4cd352dcf4da6394b76d0", 67761157 );
+        answerDAOs = new ArrayList<AnswerDAO>();
+        answerDAOs.add(new AnswerDAO(" Ir jāievēro." , 57537 , " 124f30329cbfee92882c60800df72334",  true ));
+        answerDAOs.add(new AnswerDAO(" Nav jāievēro." , 57581 , " 674be1e2298108c9544705e6454f198d",  false ));
+        answerDAOs.add(new AnswerDAO(" Nav jāievēro, izņemot maksimālā braukšanas ātruma ierobežojumus." , 57624 , " 7207e120e4cac07ccdf6151d9ab494d4",  false ));
+        answersDAO = new AnswersDAO(answerDAOs);
+        pm.makePersistent(questionDAO);
+        pm.makePersistent(answersDAO );
+        tCaseDAO = new TCaseDAO(questionDAO.getKey(), answersDAO.getKey());
+        tCaseDAO.setParagraphs(new ArrayList<String>(Arrays.asList("34.")));
+        tCaseDAO.settCaseTypeIdx( caseTypeIdx );
+        pm.makePersistent(tCaseDAO);
 
 
 

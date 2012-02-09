@@ -23,7 +23,14 @@ public class AboutDialogBox extends DialogBox{
         dock.setSpacing(4);
 
         setAnimationEnabled(true);
-        SafeHtml safeHtml =  SafeHtmlUtils.fromTrustedString(" <p> Dotaa aplikaavija izveidota teksts <br> teksts <br> teksts </p>");
+        SafeHtml safeHtml =  SafeHtmlUtils.fromTrustedString(
+                "<p>Dotā aplikācija ir izveidota mācību nolūkos lai iepazītos ar tehnoloģijām un to pielietojumu." +
+                "<br>" +
+                "Ja jums ir kādi : jautājumi \\ iebildumi \\ priekšlikumi droši rakstiet uz :" +
+                        "<b> codon.dev[att-/+]gmail.com </b>"+
+                "<br><br>" +
+                "Nekādas tiesības netiek paturētas ! </p>");
+
         HTML html = new HTML(safeHtml);
 
         //setHTML(safeHtml);

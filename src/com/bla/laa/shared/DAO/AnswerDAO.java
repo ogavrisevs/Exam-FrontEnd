@@ -47,7 +47,7 @@ public class AnswerDAO {
 
     public String asObjStat(){
         StringBuffer sb = new StringBuffer();
-        sb.append("answerDTOs.add(");
+        sb.append("answerDAOs.add(");
             sb.append("new AnswerDAO(");
 
             sb.append("\" ");

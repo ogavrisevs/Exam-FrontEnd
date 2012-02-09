@@ -33,7 +33,7 @@ public class TcUploader {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         String username = "codon.dev@gmail.com";
-        String password = "******";
+        String password = "*****";
         RemoteApiOptions options = new RemoteApiOptions()
                 .server("csn-exam.appspot.com", 443)
                         //.com.bla.laa.server("localhost", 8080)
@@ -107,6 +107,7 @@ public class TcUploader {
                     else
                         tCaseDAO = new TCaseDAO(questionDAO.getKey(), answersDAO.getKey());
 
+                     tCaseDAO.settCaseTypeIdx(10);
                     pm.makePersistent(tCaseDAO);
                     counter++;
                     logger.info("added new TCaseDAO on com.bla.laa.server : " + tCaseDAO.toString());
